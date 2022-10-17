@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="{% static 'blog/css/bootstrap.css' %}">
+    <link rel="stylesheet" href="{% static 'blog/css/style.css' %}">
+</head>
+<body>
+<div class="container-fluid bg-dark">
+    {% include 'blog/navbar.html' %}
+</div>
+<div class="container">
+    <div class="row">
+        <div class="col-sm-12">
+            {% block msg %}
+            {% for message in messages %}
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+            {{message}}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+            {% endfor %}
+            {% endblock msg %}
+        </div>
+    </div>
+    <div class="row">
+        {% block side %}
+        {% endblock side %}
+        {% block content %}
+        {% endblock content %}
+    </div>
+</div>
+
+
+<script src="{% static 'blog/jss/bootstrap.js'%}"></script>
+<script src="{% static 'blog/jss/jquery.js'%}"></script>
+<script src="{% static 'blog/jss/popper.js'%}"></script>
+</body>
+</html>

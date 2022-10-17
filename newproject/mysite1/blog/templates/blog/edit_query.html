@@ -1,0 +1,16 @@
+{% extends 'blog/base.html' %}
+{% load static %}
+{% block content %}
+<div class="container">
+    <div class="form-row">
+        <h1 class="display-4 font-italic text-white">Edit the service</h1>
+        <div class="form-control my-5">
+            <form method="POST">
+                {% csrf_token %}
+                {{ edit_query.as_p }}
+                <input type="submit" class="btn btn-primary me-md-2" value="Edit">
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

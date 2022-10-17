@@ -1,0 +1,21 @@
+{% extends 'blog/base.html' %}
+{% load static %}
+{% block content %}
+<div class="container">
+    <form action="" method="POST">
+        {% csrf_token %}
+        <h1 class="display-4 font-italic text-white"> ANSWER </h1>
+    <div class="form-floating">
+        <div class="form-group">
+                    <label for="exampleusername" class="form-label text-white ">Unique code</label>
+                    <input type="number" class="form-control" id="exampleusername" name="unique">
+        </div>
+        <div class="form-group">
+             <label for="exampleusername" class="form-label text-white ">Answer</label>
+        <textarea class="form-control"  placeholder="Leave a message"  style="height: 200px" name="answer"></textarea>
+        </div>
+           <button type="submit" class="btn btn-info btn-lg my-5">Submit</button>
+    </div>
+    </form>
+</div>
+{% endblock content %}

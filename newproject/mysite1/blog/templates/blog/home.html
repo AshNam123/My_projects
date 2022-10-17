@@ -1,0 +1,33 @@
+{% extends 'blog/base.html' %}
+{% load static %}
+{% block content %}
+<div class="container">
+    <h1 class="text-white my-5">SERVICES</h1>
+    {% for serve in services %}
+    <div class="jumbotron p-1 p-md-5 my-5 text-white shadow rounded bg-dark">
+        <h1 class="display-4 font-italic">{{serve.service_name}}</h1>
+        <h2 class="display-4 font-italic">{{serve.service_provider}}</h2>
+
+        <p class=""lead my-3>
+            Contact : <b>{{serve.service_contact}}</b>
+            Cost    :<b>{{serve.service_cost}}</b><br>
+            Posted by : <b>{{serve.user_id_ser.username}}</b>
+            {{serve.date}}
+
+        </p>
+    </div>
+    {% endfor %}
+    <h1 class="text-white my-5">QUERY</h1>
+    {% for quer in queries %}
+    <div class="jumbotron p-1 p-md-5 my-5 text-white shadow rounded bg-dark">
+        <h1 class="display-4 font-italic">{{quer.query_question}}</h1>
+        <h3 class="display-7 font-italic">{{quer.query_category}}</h3>
+        <p class=""lead my-3>
+              Posted by : <b>{{quer.user_id_query.username}}</b>
+            {{quer.date}}
+
+        </p>
+    </div>
+    {% endfor %}
+</div>
+{% endblock content %}

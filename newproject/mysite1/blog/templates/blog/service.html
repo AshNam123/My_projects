@@ -1,0 +1,69 @@
+{% extends 'blog/base.html' %}
+{% load static %}
+{% block content %}
+<h1 class="text-white my-5">SERVICES</h1>
+<div class="col-sm-center">
+    <div class="d-grid gap-2 my-2">
+  <button class="btn btn-info font-weight-bold" data-bs-toggle="modal" data-bs-target="#staticBackdrop" type="button">ADD SERVICES</button>
+        <!-- Modal -->
+            <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+              <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content justify-content-center ">
+                  <div class="modal-header">
+                    <h5 class="modal-title " id="staticBackdropLabel">SERVICE</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  </div>
+                  <div class="modal-body">
+                    <form action="" method="POST">
+                        {% csrf_token %}
+                       <div class="mb-3">
+                          <label for="exampleInputEmail1" class="form-label">Name Of Service</label>
+                          <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="servicename">
+                        </div>
+                        <div class="mb-3">
+                          <label for="exampleInputPassword1" class="form-label">Service Provider</label>
+                          <input type="text" class="form-control" id="exampleInputPassword1" name="serviceprovider">
+                        </div>
+                        <div class="mb-3">
+                          <label for="examplenumber" class="form-label">Contact number</label>
+                          <input type="number" class="form-control" id="examplenumber" name="contactnumber">
+                        </div>
+                        <div class="mb-3">
+                          <label for="exampleprice" class="form-label">Price</label>
+                          <input type="password" class="form-control" id="exampleprice" name="serviceprice">
+                        </div>
+                        <div class="d-grid gap-2 col-6 mx-auto">
+                           <button type="submit" class="btn btn-info btn-lg">Submit</button>
+                        </div>
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+    </div>
+</div>
+<!-------SERvices-------->
+<div class="container">
+
+    {% for serve in services %}
+    <div class="jumbotron p-1 p-md-5 my-5 text-white shadow rounded bg-dark">
+        <h1 class="display-4 font-italic">{{serve.service_name}}</h1>
+        <h2 class="display-4 font-italic">{{serve.service_provider}}</h2>
+
+        <p class=""lead my-3>
+            Contact : <b>{{serve.service_contact}}</b>
+            Cost    :<b>{{serve.service_cost}}</b><br>
+            Posted by:<b>{{serve.user_id_ser.username}}</b>
+            {{serve.date}}
+
+        </p>
+         {% if user.id == serve.user_id_ser_id %}
+        <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+              <a  href="/edit/{{serve.id}}" class="btn btn-primary me-md-2" type="button">Edit</a>
+              <a  href="/delete/{{serve.id}}" class="btn btn-primary" type="button">Delete</a>
+        </div>
+        {% endif %}
+    </div>
+    {% endfor %}
+</div>
+{% endblock content %}

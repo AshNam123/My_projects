@@ -1,0 +1,26 @@
+{% extends 'blog/base.html' %}
+{% load static %}
+{% block content %}
+<div class="col-sm-10">
+    <h3 class="text-white my-5">Contact Page</h3>
+    <form method="POST" action="">
+        {% csrf_token %}
+        <div class="form-row">
+            <div class="form-floating mb-3">
+               <input type="text" class="form-control" id="floatingName" placeholder="name" name="msg_name">
+               <label for="floatingInput">Name</label>
+            </div>
+            <div class="form-floating mb-3">
+               <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com" name="msg_email">
+               <label for="floatingInput">Email address</label>
+            </div>
+             <div style="margin-top:55px; padding-top:55px;" class="form-floating md-3">
+                  <textarea class="form-control" placeholder="Leave a message" id="floatingTextarea2" style="height: 200px" name="msg_message"></textarea>
+                  <label for="floatingTextarea2" class="text-white">Comments</label>
+             </div>
+        </div>
+        <button type="submit" style="margin-top:60px" class="btn btn-primary">Send</button>>
+    </form>
+</div>
+
+{% endblock content%}

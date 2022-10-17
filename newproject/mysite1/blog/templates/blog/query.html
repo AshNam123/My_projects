@@ -1,0 +1,67 @@
+{% extends 'blog/base.html' %}
+{% load static %}
+{% block content %}
+ <h1 class="text-white my-5">QUERY</h1>
+<div class="col-sm-center">
+<div class="d-grid gap-4 my-2">
+  <button class="btn btn-info" data-bs-toggle="modal" data-bs-target="#staticBackdrop" type="button">ADD QUERY</button>
+     <!-- Modal -->
+
+            <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+              <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title  text-center" id="staticBackdropLabel">QUERY</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  </div>
+                  <div class="modal-body">
+                    <form action="" method="POST">
+                        {% csrf_token %}
+                      <div class="mb-3">
+                          <label for="examplecategory" class="form-label">Query Category</label>
+                          <input type="text" class="form-control" id="examplecategory" aria-describedby="emailHelp" name="querycategory">
+                        </div>
+                        <div  class="md-3">
+                              <label for="floatingTextarea2" class="form-label">Query Details</label>
+                            <textarea class="form-control" placeholder="Leave a message" id="floatingTextarea2" style="height: 200px" name="querydetails"></textarea>
+                       </div>
+                        <div class="d-grid gap-5 col-6 mx-auto " style="padding-top:40px;">
+                           <button type="submit" class="btn btn-info btn-lg">Submit</button>
+                        </div>
+                    </form>
+
+                  </div>
+
+                </div>
+              </div>
+            </div>
+</div>
+</div>
+<div class="contianer">
+    {% for quer in queries %}
+    <div class="jumbotron p-1 p-md-5 my-5 text-white shadow rounded bg-dark">
+        <h1 class="display-4 font-italic">{{quer.query_question}}</h1>
+        <h3 class="display-7 font-italic">{{quer.query_category}}</h3>
+        <p class=""lead my-3>
+            {{quer.date}}<br>
+            Unique code:{{quer.id}}
+            Posted by:{{quer.user_id_query.username}}
+
+            {% for ans1 in ans %}
+            {% if ans1.unique_id == quer.id %}
+
+            {{ans1.ans_query}}
+            {% endif %}
+            {% endfor %}
+        </p>
+        <a href="{% url 'detail' %}" class="btn btn-primary">ANSWER</a>
+        {% if user.id == quer.user_id_quer_id %}
+         <div class="d-grid gap-2 d-md-flex justify-content-md-end my-2">
+              <a  href="/edit1/{{quer.id}}" class="btn btn-primary me-md-2" type="button">Edit</a>
+              <a  href="/delete1/{{quer.id}}" class="btn btn-primary" type="button">Delete</a>
+        </div>
+        {% endif %}
+    </div>
+    {% endfor %}
+</div>
+{% endblock content %}
